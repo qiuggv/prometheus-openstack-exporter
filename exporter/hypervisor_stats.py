@@ -14,6 +14,7 @@
 # limitations under the License.
 
 from base import OSBase
+import os
 
 from prometheus_client import CollectorRegistry, generate_latest, Gauge
 import logging
@@ -97,9 +98,9 @@ class HypervisorStats(OSBase):
             for agg in nova_aggregates.keys():
                 agg_hosts = nova_aggregates[agg]['hosts']
                 if host in agg_hosts:
-                    free = ((int(self.extra_config['cpu_ratio'] *
-                                 m_vcpus)) -
-                            m_vcpus_used)
+                    #free = ((int(self.extra_config['cpu_ratio'] * m_vcpus)) - m_vcpus_used)
+                    cpu_ratio = float(os.environ['OS_CPU_OC_RATIO'])
+                    free = ((int(cpu_ratio * m_vcpus)) - m_vcpus_used)
                     nova_aggregates[agg]['metrics']['free_vcpus'] += free
 
         # Dispatch the aggregate metrics
