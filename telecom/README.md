@@ -1,0 +1,4 @@
+# 说明
+env_file: 该文件用于设置OpenStack集群的信息，其中OS_CPU_OC_RATIO用于设置超配比率，这个需要和OpenStack设置的超配比率一致
+
+startup_openstack_exporter.sh 启动容器的脚本，注意：需要根据不同的环境设置controller域的ip地址，否则无法连到controller节点机器
